@@ -1,0 +1,62 @@
+.artists h1 {
+  font-weight: 500; 
+  font-style: italic;
+  margin-bottom: 24px;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);}
+
+.artist-container {
+  column-gap: 20px;
+}
+
+.artist {
+  display: grid;
+  align-items: center;
+  grid-auto-flow: dense;
+  grid-template-rows: 8fr 2fr;
+}
+
+.artist img {
+  width: 140px;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  transition: all 0.2s;
+  border: 2px solid rgba(169, 150, 253, 0.5);
+  box-shadow: rgba(221, 221, 221, 0.3) 0px 6px 18px -3px,
+    rgba(221, 221, 221, 0.2) 0px -3px 0px inset;
+}
+
+.artist img:hover {
+  border: 4px solid rgba(169, 150, 253, 0.6);
+}
+
+.artist p {
+  font-weight: 500;
+  text-align: center;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+}
+
+.containers {
+  cursor: grab;
+  display: flex;
+  overflow-x: audto;
+  padding: 0 0 12px;
+  align-items: center;
+}
+
+.artist-container::-webkit-scrollbar {
+  height: 10px;
+}
+
+.artist-container::-webkit-scrollbar-track {
+  border-radius: 40px;
+  box-shadow: inset 0 0 0.3rem rgb(79, 78, 78);
+}
+
+.artist-container::-webkit-scrollbar-thumb {
+  outline: none;
+  border-radius: 40px;
+  background-color: rgba(25, 43, 206, 0.2);
+  box-shadow: inset 0 0 0.5rem rgb(116, 116, 116);
+}
