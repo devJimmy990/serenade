@@ -4,9 +4,8 @@ import PopularSongs from "@/components/popular/populars";
 import RecommendedAlbums from "@/components/album/albums";
 import PlayerController from "@/components/player-controller/player";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
-export default function Home() {
+export default function DiscoverPage() {
   const [title, setTitle] = useState("");
   const appName = "Serenade";
   useEffect(() => {
@@ -18,7 +17,7 @@ export default function Home() {
           index++;
         } else { clearTimeout(interval); }
       }, 800);
-    }, 100);
+    });
     return () => clearTimeout(timer);
   }, [])
   return (
@@ -29,12 +28,10 @@ export default function Home() {
           <FeaturedSongs />
           <RecommendedAlbums />
         </div>
-        <div className='right-content d-flex flex-column justify-content-between col-12 col-lg-3 m-0 p-0'>
+        <div className='right-content col-12 col-lg-3 m-0 p-0'>
           <div className="d-lg-none text-center" style={{ fontWeight: 'bold', fontSize: '1.5rem', fontStyle: 'italic' }}>{title}</div>
           <div><RecommendedSongs /></div>
           <div className="d-none d-lg-block"><PlayerController /></div>
-          <div className="col-12 d-lg-none fixed-bottom"><PlayerController /></div>
-
         </div>
       </div>
 

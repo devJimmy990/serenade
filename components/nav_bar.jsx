@@ -62,7 +62,8 @@ const CustomizedNavBar = () => {
                 </ul>
 
             </div>
-            <ul className={`d-none d-lg-flex flex-lg-column align-items-center justify-content-center list-unstyled`}>
+
+            <ul className={`col-12 d-none d-lg-flex flex-column align-items-center justify-content-center list-unstyled`}>
                 {bottomPages.map((page) => (
                     <li key={page.path} className={`nav-item ${activePage === page.path ? 'active' : ''} d-lg-flex`}>
                         <Link href={page.path} className='p-2 text-decoration-none'>

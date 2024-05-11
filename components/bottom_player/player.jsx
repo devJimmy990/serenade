@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIsPlaying } from '@/controller/slices/controller_slice';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { PlayArrow, FastRewind, FastForward, Pause } from '@mui/icons-material';
-import { setAudioReference, setCurrentSong, setCurrentTime, setDuration } from '@/controller/slices/audio_slice';
+import { setCurrentSong, setCurrentTime, setDuration } from '@/controller/slices/audio_slice';
 
 const BottomPlayerController = () => {
     const dispatch = useDispatch();

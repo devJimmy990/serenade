@@ -6,18 +6,15 @@ import { PlayArrow, FastRewind, FastForward, Pause } from '@mui/icons-material';
 import { setCurrentSong, setCurrentTime, setDuration } from '@/controller/slices/audio_slice';
 
 const PlayerController = () => {
+    const audioRef = useRef(null);
     const dispatch = useDispatch();
     const [rotated, setRotated] = useState(false);
     const audio = useSelector(state => state.audio);
     const controller = useSelector(state => state.controller);
 
     useEffect(() => {
-        if (controller.isPlaying) {
-            // dispatch(setAudioReference)
-            audio.reference.currentTime = audio.currentTime;
-            audio.reference.play();
-        }
-    }, [audio.currentTime, audio.reference, controller.isPlaying]);
+        dispatch(setCurrentSong({ currentSong: 0 }));
+    }, [dispatch]);
 
     const stopPlaying = useCallback(() => {
         dispatch(setIsPlaying({ isPlaying: false }));
@@ -26,14 +23,14 @@ const PlayerController = () => {
 
     const handlePlayClick = useCallback(() => {
         if (controller.isPlaying) {
-            audio.reference?.pause();
+            audioRef.current.pause();
             setRotated(false);
         } else {
-            audio.reference?.play();
+            audioRef.current.play();
             setRotated(true);
         }
         dispatch(setIsPlaying({ isPlaying: !controller.isPlaying }));
-    }, [controller.isPlaying, dispatch, audio.reference]);
+    }, [controller.isPlaying, dispatch]);
 
     const handlePreviousSong = useCallback(() => {
         stopPlaying();
@@ -47,54 +44,60 @@ const PlayerController = () => {
 
 
     const handleTimeUpdate = useCallback(() => {
-        dispatch(setCurrentTime({ currentTime: audio.reference?.currentTime }));
-        if (audio.reference?.currentTime >= audio.duration) {
-            stopPlaying();
-            dispatch(setCurrentSong({ currentSong: audio.currentSong + 1 }));
-        }
-    }, [audio.currentSong, audio.duration, audio.reference?.currentTime, dispatch, stopPlaying]);
+        dispatch(setCurrentTime({ currentTime: audioRef.current.currentTime }));
+        // if (audioRef.current?.currentTime >= audio.duration) {
+        //     stopPlaying();
+        //     dispatch(setCurrentSong({ currentSong: audio.currentSong + 1 }));
+        // }
+        // }, [audio.currentSong, audio.duration, dispatch, stopPlaying]);
+    }, [dispatch]);
 
     const handleProgressChange = useCallback((e) => {
         const newTime = e.target.value;
-        dispatch(setCurrentTime({ currentTime: audio.reference?.currentTime }));
-        audio.reference.currentTime = newTime;
-    }, [audio.reference, dispatch]);
+        dispatch(setCurrentTime({ currentTime: newTime }));
+        audioRef.current.currentTime = newTime;
+    }, [dispatch]);
 
     useEffect(() => {
-        dispatch(setDuration({ duration: audio.reference?.duration ?? 0 }));
-    }, [audio.reference?.duration, dispatch]);
+        dispatch(setDuration({ duration: audioRef.current.duration ?? 0 }));
+    }, [audioRef.current?.duration, dispatch]);
 
     useEffect(() => {
-        const temp = audio?.reference;
-        temp?.addEventListener('timeupdate', handleTimeUpdate);
+        const temp = audioRef.current;
+        temp.addEventListener('timeupdate', handleTimeUpdate);
 
         return () => {
-            temp?.removeEventListener('timeupdate', handleTimeUpdate);
+            temp.removeEventListener('timeupdate', handleTimeUpdate);
         };
-    }, [audio?.reference, handleTimeUpdate]);
+    }, [handleTimeUpdate]);
 
     return (
-        <div className="music-player">
-            <HeaderPlayerController song={{ ...{ audio }, rotated }} />
+        <div className="music-player d-flex flex-row flex-lg-column mb-5 m-lg-0 p-0 pb-2">
+            <audio ref={audioRef} src={songs[audio.currentSong].source} />
+            <div className='col-4 col-lg-12'>
+                <HeaderPlayerController song={{ ...{ audio }, rotated }} />
+            </div>
 
-            <input
-                type="range"
-                className='progress'
-                value={audio.currentTime}
-                onChange={handleProgressChange}
-                max={audio.reference?.duration ?? 0}
-            />
+            <div className='col-8 d-flex flex-column justify-content-end align-items-center'>
+                <input
+                    type="range"
+                    className='progress mb-3'
+                    value={audio.currentTime}
+                    onChange={handleProgressChange}
+                    max={audioRef.current?.duration ?? 0}
+                />
 
-            <div className='controls'>
-                <button type="button" className="backward" onClick={handlePreviousSong}>
-                    <FastRewind />
-                </button>
-                <button type="button" className="play-pause-btn" onClick={handlePlayClick}>
-                    {controller.isPlaying ? <Pause /> : <PlayArrow />}
-                </button>
-                <button type="button" className="forward" onClick={handleForwardSong}>
-                    <FastForward />
-                </button>
+                <div className='controls col-12 d-flex justify-content-evenly align-content-between'>
+                    <button type="button" className="backward" onClick={handlePreviousSong}>
+                        <FastRewind />
+                    </button>
+                    <button type="button" className="play-pause-btn" onClick={handlePlayClick}>
+                        {controller.isPlaying ? <Pause /> : <PlayArrow />}
+                    </button>
+                    <button type="button" className="forward" onClick={handleForwardSong}>
+                        <FastForward />
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -3,7 +3,7 @@
     color: #fff;
     margin-top: 20px;
     padding: 30px 20px;
-    border-radius: 16px;
+    border-radius: 16px 16px 16px 0px;
     align-items: center;
     flex-direction: column;
     justify-content: center;
@@ -12,10 +12,8 @@
 }
 
 .album-cover {
-    position: relative;
-}
+    /* position: relative; */
 
-.album-cover img {
     max-width: 120px;
     aspect-ratio: 1/1;
     border-radius: 50%;
@@ -58,7 +56,6 @@
     height: 6px;
     cursor: pointer;
     border-radius: 4px;
-    margin-bottom: 16px;
     background: rgba(200, 187, 255, 0.6);
     -webkit-appearance: none;
     appearance: none;
@@ -75,17 +72,12 @@
     appearance: none;
 }
 
-.controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 
 .controls button {
     border: 0;
     outline: 0;
     width: 36px;
-    margin: 20px;
     color: #fff;
     display: flex;
     cursor: pointer;

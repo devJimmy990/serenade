@@ -1,12 +1,20 @@
 import 'swiper/swiper-bundle.css';
 import SongCard from './song_card';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useCallback, useEffect, useState } from 'react';
 const PopularSongs = () => {
+    // const [index, setIndex] = useState(0);
+    // useEffect(() => {
+    //     const autoSlide = () =>
+    //         setIndex((index + 1) % popular.length);
 
+    //     const interval = setInterval(autoSlide, 5000);
+    //     return () => clearInterval(interval);
+    // }, [index]);
     return (
-        <div className='slider-container'>
+        <div className='slider-container col-12 '>
             <h1>Popular Playlist</h1>
-           
+            {/* <div className='swiper'> <SongCard song={popular[index]} /></div> */}
             <Swiper
                 className='swiper'
                 loop={true}
@@ -17,7 +25,7 @@ const PopularSongs = () => {
                 slidesPerView="auto"
                 coverflowEffect={{
                     rotate: 10,
-                    stretch: 120,
+                    stretch: 20,
                     depth: 200,
                     modifier: 1,
                     slideShadows: false,
@@ -45,3 +53,5 @@ const popular = [
     { title: "Smooth Jazz Journey", img: "https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/20c8fdd5-9f4a-4917-ae90-0239a52e8334" },
     { title: "Uplifting Rhythms", img: "https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/df461a99-2fb3-4d55-ac16-2e0c6dd783e1" },
 ]
+
+

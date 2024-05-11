@@ -5,7 +5,7 @@ const RecommendedSongs = () => {
     return (
         <div class="recommended-songs px-2">
             <h1>Recommended Songs</h1>
-            <div class="song-container d-flex flex-lg-column overflow-auto">
+            <div class="song-container d-flex flex-lg-column overflow-auto col-12">
                 {recommended.map((song) => (<SongCard key={song.title} song={song} />))}
             </div>
         </div>

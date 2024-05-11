@@ -9,17 +9,11 @@
     column-gap: 24px;
 }
 
-.album {
-    display: grid;
-    grid-auto-flow: dense;
-    grid-template-rows: 5fr 2fr;
-}
-
 .album-frame {
     width: 180px;
     overflow: hidden;
     aspect-ratio: 1/1;
-    position: relative;
+    /* position: relative; */
     border-radius: 10px;
     margin-bottom: 15px;
     border: 2px solid rgba(169, 150, 253, 0.5);
@@ -30,7 +24,6 @@
     inset: 0;
     height: 100%;
     object-fit: cover;
-    position: absolute;
     transition: transform 0.8s;
 }
 

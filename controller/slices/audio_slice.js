@@ -37,7 +37,6 @@ export const audioSlicer = createSlice({
         title: songs[0].title,
         cover: songs[0].cover,
         source: songs[0].source,
-
     },
     reducers: {
         setCurrentSong(state, action) {
@@ -60,8 +59,12 @@ export const audioSlicer = createSlice({
             state.duration = action.payload.duration;
         },
         setAudioReference(state, action) {
+            console.log(action.payload.reference);
             state.reference = action.payload.reference;
-        }
+        },
+        setAudioSource(state, action) {
+            state.source = action.payload.source;
+        },
     }
 });
 export default audioSlicer.reducer
@@ -69,6 +72,7 @@ export const {
     setDuration,
     setCurrentSong,
     setCurrentTime,
+    setAudioSource,
     setAudioReference,
 } = audioSlicer.actions;
 
